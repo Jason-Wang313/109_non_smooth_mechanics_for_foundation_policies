@@ -2,21 +2,25 @@
 
         Paper: 109 Non-Smooth Mechanics for Foundation Policies
 
-        ## Strongest Prior-Work Threats
+        ## Strongest Technical Threats
         - Modeling Large Sliding Frictional Contact Along Non-Smooth Discontinuities in X-FEM (2011)
 - An Efficient Spring Model Based on a Curved Beam with Non-Smooth Contact Mechanics for Valve Train Simulations (2010)
 - Generalization of hyperbolic smoothing approach for non-smooth and non-Lipschitz functions (2022)
 - Simulation of a Valve Train Using Non-Smooth Mechanics (2008)
 - A variational-based non-smooth contact dynamics approach for the seismic analysis of historical masonry structures (2024)
 - The non-smooth contact dynamics method (1999)
+- Compatibility analysis between two-phase local/nonlocal and classical theories for nanobeams in smooth and non-smooth fields (2026)
+- A thermodynamically consistent non-linear mathematical model for thermoviscoelastic plates/shells with finite deformation and finite strain based on classical continuum mechanics (2020)
 
-        ## Response
-        The paper no longer claims that generic world modeling, generic uncertainty, or larger datasets are novel. The defensible contribution is the combination of explicit unrealized physical branches, a tail-risk objective over those branches, diagnostic probing, and failure memory.
+        ## ICLR Main Response
+        A hostile ICLR reviewer would be correct to reject this as a main-conference submission. The v2 paper has reproducible synthetic evidence and careful limitations, but it does not contain the real robot, high-fidelity simulator, learned model, or manual related-work depth needed for the ICLR main track.
 
-        ## What Is Not Claimed
-        - No real-robot state of the art.
-        - No proof that the branch atlas can always discover the true hidden mode.
-        - No claim that advisor-name matches imply relevance.
+        ## Honest Action
+        The paper is marked `KILL_ARCHIVE`. This avoids converting a generated workshop-style idea into an overstated main-conference claim.
 
-        ## Remaining Reviewer Risk
-        A main-conference reviewer can still reject the work for synthetic-only evidence. The correct venue state is `WORKSHOP_ONLY` until hardware or high-fidelity simulation validation is added.
+        ## What Would Be Needed To Revive
+        - Real robot or high-fidelity benchmark experiments.
+        - Implemented model and baselines, not synthetic probability tables.
+        - Manual full-paper related-work audit.
+        - Paper-specific writing and figures.
+        - Evidence that the core mechanism is learned and useful under deployment shift.
