@@ -1,12 +1,11 @@
 # Final Audit
 
-1. Chosen thesis: Non-Smooth Mechanics for Foundation Policies explores `Bring contact discontinuities into the policy objective instead of smoothing them away.` for classical mechanics and robot foundation models.
-2. ICLR-main decision: KILL_ARCHIVE.
-3. Submission-hardening version: v3.
-4. Reason: synthetic-only, template-generated evidence cannot support ICLR main-conference robotics claims.
-5. Closest hostile prior work: see `docs/hostile_prior_work.md`, `docs/hostile_prior_work_100_cards.csv`, and `docs/hostile_reviewer_response.md`.
-6. Reproducibility: synthetic code runs, but no real robot or high-fidelity benchmark is reproduced.
-7. Claim-validity status: main-conference claims killed; archive memo retained.
-8. Exact Downloads PDF path: `C:/Users/wangz/Downloads/109.pdf`
-9. GitHub URL: https://github.com/Jason-Wang313/109_non_smooth_mechanics_for_foundation_policies
-10. Confirmation: no visible Desktop copy was requested or made.
+Paper: 109 non_smooth_mechanics_for_foundation_policies
+
+Decision: STRONG_REVISE
+
+The v4 rebuild adds a local contact-mode benchmark with paired seeds, strong local baselines, ablations, stress sweeps, failure cases, LaTeX tables, and figures. The proposed contact-mode boundary atlas beats the strongest non-oracle baseline, `complementarity_residual_planner`, by `0.076 +/- 0.007` paired success under combined stress and improves contact-mode F1 from `0.495` to `0.630`.
+
+Safety gates pass: unsafe impulse, jam rate, slip overshoot, and intervention cost are all lower than the strongest non-oracle baseline.
+
+Remaining blocker: the evidence is local. The paper should not be submitted to ICLR main without real robot or independent high-fidelity validation and external trained baselines.

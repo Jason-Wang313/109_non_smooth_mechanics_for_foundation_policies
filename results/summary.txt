@@ -1,16 +1,52 @@
-Submission-hardening experiment for paper 109 non_smooth_mechanics_for_foundation_policies
-Seven seeds, 600 episodes per seed, strong baselines, ablations, stress sweep, and negative cases.
-observed_only_behavior_clone hidden_mode_shift mean_success=0.4074 ci95=0.0148 tail=0.5926
-observed_only_behavior_clone combined_stress mean_success=0.3336 ci95=0.0140 tail=0.6664
-data_augmentation_wam hidden_mode_shift mean_success=0.5002 ci95=0.0181 tail=0.4998
-data_augmentation_wam combined_stress mean_success=0.4219 ci95=0.0081 tail=0.5781
-scalar_uncertainty_planner hidden_mode_shift mean_success=0.5645 ci95=0.0126 tail=0.4355
-scalar_uncertainty_planner combined_stress mean_success=0.5031 ci95=0.0167 tail=0.4969
-ensemble_disagreement_planner hidden_mode_shift mean_success=0.5962 ci95=0.0145 tail=0.4038
-ensemble_disagreement_planner combined_stress mean_success=0.5531 ci95=0.0111 tail=0.4469
-conformal_risk_filter hidden_mode_shift mean_success=0.6219 ci95=0.0180 tail=0.3781
-conformal_risk_filter combined_stress mean_success=0.5645 ci95=0.0054 tail=0.4355
-proposed_branch_mechanism hidden_mode_shift mean_success=0.6828 ci95=0.0100 tail=0.3172
-proposed_branch_mechanism combined_stress mean_success=0.6657 ci95=0.0135 tail=0.3343
-oracle_branch_upper_bound hidden_mode_shift mean_success=0.7664 ci95=0.0086 tail=0.2336
-oracle_branch_upper_bound combined_stress mean_success=0.7548 ci95=0.0111 tail=0.2452
+Paper 109 non_smooth_mechanics_for_foundation_policies evidence rebuild
+Design: 5 tasks x 7 non-smooth regimes x 5 splits x 9 methods, 7 seeds, 84 episodes/group.
+Terminal decision: STRONG_REVISE
+Rationale: local contact-mode evidence supports the mechanism only if all gates pass; real robot/external validation remains missing.
+
+Combined-stress ranking:
+oracle_contact_mode_supervisor: success=0.628 +/- 0.005, mode_f1=0.722, boundary_error=0.226, unsafe_impulse=0.046, jam_rate=0.093, slip_overshoot=0.039, cost=0.202, regret=0.000
+proposed_contact_mode_boundary_atlas: success=0.540 +/- 0.004, mode_f1=0.630, boundary_error=0.246, unsafe_impulse=0.064, jam_rate=0.092, slip_overshoot=0.057, cost=0.217, regret=0.088
+complementarity_residual_planner: success=0.463 +/- 0.007, mode_f1=0.495, boundary_error=0.294, unsafe_impulse=0.079, jam_rate=0.112, slip_overshoot=0.076, cost=0.264, regret=0.165
+ensemble_disagreement_planner: success=0.434 +/- 0.004, mode_f1=0.409, boundary_error=0.317, unsafe_impulse=0.084, jam_rate=0.117, slip_overshoot=0.096, cost=0.260, regret=0.194
+robotics_transformer_surrogate: success=0.427 +/- 0.004, mode_f1=0.342, boundary_error=0.342, unsafe_impulse=0.112, jam_rate=0.126, slip_overshoot=0.115, cost=0.181, regret=0.201
+conformal_risk_filter: success=0.425 +/- 0.004, mode_f1=0.392, boundary_error=0.323, unsafe_impulse=0.070, jam_rate=0.119, slip_overshoot=0.096, cost=0.290, regret=0.202
+diffusion_policy_surrogate: success=0.411 +/- 0.002, mode_f1=0.319, boundary_error=0.349, unsafe_impulse=0.117, jam_rate=0.130, slip_overshoot=0.119, cost=0.171, regret=0.217
+domain_randomization: success=0.386 +/- 0.004, mode_f1=0.294, boundary_error=0.356, unsafe_impulse=0.113, jam_rate=0.132, slip_overshoot=0.119, cost=0.161, regret=0.242
+no_contact_behavior_clone: success=0.314 +/- 0.006, mode_f1=0.210, boundary_error=0.381, unsafe_impulse=0.125, jam_rate=0.139, slip_overshoot=0.133, cost=0.153, regret=0.314
+
+Gate outcomes:
+success_gate: True
+diagnostic_gate: True
+safety_gate: True
+pairwise_gate: True
+ablation_gate: True
+success_margin_vs_strongest: 0.07633624878522838
+contact_mode_f1_delta_vs_strongest: 0.13533059490916527
+boundary_error_delta_vs_strongest: -0.04863656454821516
+unsafe_impulse_delta_vs_strongest: -0.01489718210904449
+jam_rate_delta_vs_strongest: -0.020752406447392277
+slip_overshoot_delta_vs_strongest: -0.018764087997111593
+intervention_cost_delta_vs_strongest: -0.047107999999999955
+ablation_margin_vs_best_removed_component: 0.027162293488824263
+strongest_non_oracle_baseline: complementarity_residual_planner
+best_removed_component: minus_diagnostic_micro_probe
+oracle_success: 0.628
+
+Pairwise proposed comparisons:
+complementarity_residual_planner: diff=0.076 +/- 0.007, wins=7/7, decision=proposed_better
+conformal_risk_filter: diff=0.114 +/- 0.004, wins=7/7, decision=proposed_better
+diffusion_policy_surrogate: diff=0.128 +/- 0.004, wins=7/7, decision=proposed_better
+domain_randomization: diff=0.154 +/- 0.007, wins=7/7, decision=proposed_better
+ensemble_disagreement_planner: diff=0.105 +/- 0.007, wins=7/7, decision=proposed_better
+no_contact_behavior_clone: diff=0.225 +/- 0.008, wins=7/7, decision=proposed_better
+oracle_contact_mode_supervisor: diff=-0.088 +/- 0.007, wins=0/7, decision=not_decisive
+robotics_transformer_surrogate: diff=0.112 +/- 0.003, wins=7/7, decision=proposed_better
+
+Ablations:
+full_contact_mode_boundary_atlas: success=0.533 +/- 0.007, mode_f1=0.631, boundary_error=0.246, unsafe_impulse=0.065, note=all components
+minus_diagnostic_micro_probe: success=0.506 +/- 0.010, mode_f1=0.575, boundary_error=0.278, unsafe_impulse=0.075, note=does not actively disambiguate contact modes
+minus_stick_slip_hysteresis: success=0.505 +/- 0.008, mode_f1=0.543, boundary_error=0.276, unsafe_impulse=0.073, note=oscillates across stick-slip modes
+minus_complementarity_residual: success=0.504 +/- 0.006, mode_f1=0.535, boundary_error=0.275, unsafe_impulse=0.072, note=accepts physically impossible smooth predictions
+minus_impulse_budget_guard: success=0.497 +/- 0.007, mode_f1=0.587, boundary_error=0.262, unsafe_impulse=0.090, note=over-commits near impact onset
+minus_contact_mode_classifier: success=0.477 +/- 0.004, mode_f1=0.470, boundary_error=0.293, unsafe_impulse=0.071, note=cannot localize contact-mode boundaries
+complementarity_only: success=0.462 +/- 0.007, mode_f1=0.494, boundary_error=0.294, unsafe_impulse=0.079, note=complementarity residual baseline

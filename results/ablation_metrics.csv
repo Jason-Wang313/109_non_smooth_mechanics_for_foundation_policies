@@ -1,6 +1,8 @@
-ablation,combined_stress_mean_success,ci95_success,interpretation
-full_proposed_branch_mechanism,0.6688,0.0132,all components
-minus_branch_atlas,0.5560,0.0144,removes explicit unrealized futures
-minus_tail_risk_objective,0.5750,0.0069,uses mean predicted value only
-minus_diagnostic_probe,0.5795,0.0135,does not actively test ambiguous physical modes
-minus_failure_memory,0.6190,0.0207,does not reuse repaired beliefs
+ablation,success,success_ci95,contact_mode_f1,contact_mode_f1_ci95,boundary_error,boundary_error_ci95,unsafe_impulse,unsafe_impulse_ci95,jam_rate,jam_rate_ci95,slip_overshoot,slip_overshoot_ci95,intervention_cost,intervention_cost_ci95,data_efficiency_proxy,data_efficiency_proxy_ci95,groups
+full_contact_mode_boundary_atlas,0.5333,0.0071,0.6308,0.0011,0.2458,0.0004,0.0645,0.0005,0.0921,0.0003,0.0566,0.0004,0.2168,0.0,0.6042,0.0012,7
+minus_contact_mode_classifier,0.4772,0.0044,0.4697,0.001,0.2928,0.0007,0.0706,0.0005,0.1111,0.0004,0.0631,0.0006,0.2125,0.0,0.466,0.0011,7
+minus_complementarity_residual,0.5044,0.0056,0.5348,0.0014,0.2748,0.0005,0.0724,0.0002,0.099,0.0006,0.0843,0.0006,0.2029,0.0,0.4893,0.0008,7
+minus_impulse_budget_guard,0.4972,0.0069,0.5875,0.0012,0.2624,0.0007,0.0896,0.0003,0.1002,0.0008,0.0642,0.0006,0.1929,0.0,0.5622,0.0009,7
+minus_stick_slip_hysteresis,0.5055,0.0076,0.5434,0.0016,0.2763,0.0004,0.0734,0.0006,0.0999,0.0003,0.0827,0.0006,0.1978,0.0,0.5631,0.001,7
+minus_diagnostic_micro_probe,0.5062,0.0097,0.5749,0.0013,0.2782,0.0009,0.0748,0.0005,0.1137,0.0006,0.0646,0.0007,0.1802,0.0,0.5385,0.0011,7
+complementarity_only,0.4619,0.007,0.4943,0.0022,0.2942,0.0009,0.0785,0.0004,0.1121,0.0005,0.0762,0.0007,0.2639,0.0,0.4955,0.0013,7

@@ -1,6 +1,15 @@
 # Claims
 
-- Mechanism claim: Non smooth mechanics for foundation policies keeps action-critical alternatives explicit until a physical observation collapses them.
-- Evidence claim: the included synthetic experiment tests hidden physical-mode perturbations and compares observed-only, augmented-data, uncertainty, and proposed variants.
-- Scope claim: results support mechanism plausibility, not real-robot deployment.
-- Unsupported claim explicitly avoided: no claim of SOTA robot performance.
+## Supported Locally
+
+- Smooth foundation-policy surrogates fail under non-smooth contact-mode shifts.
+- A contact-mode boundary atlas improves combined-stress success over complementarity residual, conformal risk, ensemble disagreement, diffusion-policy, and robotics-transformer surrogates.
+- The gain is not purchased with higher unsafe impulse, jam, slip, or intervention cost versus the strongest non-oracle baseline.
+- Contact-mode classification, complementarity residuals, impulse guards, hysteresis, and diagnostic probes all contribute.
+
+## Not Claimed
+
+- Real robot readiness.
+- Generalization to all contact-rich manipulation tasks.
+- Superiority over fully trained external robot foundation models.
+- A new contact solver.

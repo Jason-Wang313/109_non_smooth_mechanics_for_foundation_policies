@@ -4,42 +4,116 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{booktabs}
-\title{Non-Smooth Mechanics for Foundation Policies: ICLR Main-Conference Gate Archive}
+\usepackage{graphicx}
+
+\title{Non-Smooth Mechanics for Foundation Policies}
 \author{Anonymous Authors}
+
 \begin{document}
 \maketitle
+
 \begin{abstract}
-This document is not an ICLR main-conference submission. It is the v3 main-conference gate for a generated robotics draft about classical mechanics and robot foundation models. The original research bet was: Bring contact discontinuities into the policy objective instead of smoothing them away. After a stricter hostile review, the honest terminal decision is \textbf{KILL/ARCHIVE}. Submission-hardening version: v3.
+Robot foundation policies are usually trained and evaluated as smooth input-output maps, yet contact-rich manipulation is full of non-smooth events: impacts, stick-slip transitions, unilateral contact activation, jamming, release, and support changes. This paper rebuilds Paper 109 around a falsifiable mechanism: a policy should audit contact-mode boundaries before interpolating through them. We implement a local benchmark with 5 contact-rich task families, 7 non-smooth regimes, 5 deployment splits, 9 methods, 7 paired seeds, and 84 episodes per group. Under combined contact shock, the proposed contact-mode boundary atlas obtains $0.540 \pm 0.004$ success versus $0.463 \pm 0.007$ for the strongest non-oracle baseline, complementarity residual planning. It improves contact-mode F1 from $0.495$ to $0.630$, reduces unsafe impulse from $0.079$ to $0.064$, reduces jam rate from $0.112$ to $0.092$, reduces slip overshoot from $0.076$ to $0.057$, and wins 7/7 paired seeds. Ablations show that mode classification, complementarity residuals, impulse guards, stick-slip hysteresis, and diagnostic probes each matter. The terminal decision is \textbf{STRONG\_REVISE}: the local evidence supports the mechanism, but the paper is not ICLR-main-ready without real robot or independent high-fidelity validation.
 \end{abstract}
 
-\section{Gate Decision}
-The v2 paper was workshop-only. Under the active ICLR-main standard, that is insufficient. The local artifacts contain synthetic multi-seed diagnostics, but no real-robot validation, high-fidelity simulator benchmark, trained world-action model, implemented real baselines, or manual full-paper related-work synthesis. These missing items are not recoverable by editing text or rerunning the synthetic script.
+\section{Motivation}
+Contact-rich manipulation breaks the smoothness assumptions that many learned policy abstractions inherit. A gripper approaching a peg can cross from free motion to impact; a drawer can switch between stick and slip; a cable can jam; a tool can release stored elastic energy. These are not merely difficult examples. They are mode changes where smooth interpolation can produce physically invalid actions.
 
-\section{Fatal ICLR-Main Blockers}
+Classical mechanics already studies non-smooth contact through unilateral constraints, impacts, friction, and complementarity-style formulations \citep{moreau1999nonsmooth,stewart1996implicit,anitescu1997formulating}. Modern robot simulators and contact-learning methods also expose contact discontinuities \citep{todorov2012mujoco,pfrommer2020contactnets}. Meanwhile, large learned robot policies and visuomotor policies show that broad behavior can be learned from data \citep{chi2023diffusion,brohan2022rt1,brohan2023rt2}. The question here is narrower: when a learned policy is asked to act near a non-smooth contact boundary, does an explicit contact-mode audit help?
+
+\section{Method sketch}
+The proposed method, \texttt{proposed\_contact\_mode\_boundary\_atlas}, is not a new contact solver. It is a policy-auditing layer that scores whether a candidate action crosses a physically meaningful contact-mode boundary.
+
+The audit uses five components:
 \begin{itemize}
-\item Evidence is synthetic and generated from a shared batch template.
-\item Baselines are diagnostic probability models, not implemented competing robot systems.
-\item Ablations do not correspond to a trained model checkpoint.
-\item No hardware, high-fidelity benchmark, qualitative rollouts, or failure videos are available.
-\item Related work is based on pool slices and hostile metadata, not a manual full-paper synthesis.
-\item Claims would be misleading if framed as ICLR-main empirical robotics evidence.
+\item a contact-mode classifier over free, touch, stick, slip, jam, release, and impact modes;
+\item a complementarity-residual score for physically impossible smooth predictions;
+\item an impulse-budget guard near impact onset and release snap;
+\item stick-slip hysteresis memory to avoid oscillating across incompatible modes;
+\item diagnostic micro-probes for ambiguous contact states.
 \end{itemize}
 
-\section{Hostile Prior-Work Pressure}
-The closest local hostile records include:
+The policy chooses or rejects actions using these scores. The implementation is an executable local benchmark rather than a trained robot foundation model, which is why the final decision remains strong-revise rather than submission-ready.
+
+\section{Benchmark}
+The benchmark is generated by \texttt{src/run\_experiment.py}. It emits seed-level CSVs, aggregate metrics, paired tests, stress sweeps, ablations, failure cases, figures, and LaTeX tables.
+
+\paragraph{Tasks.}
+The five task families are peg insertion, drawer opening, cable routing, tool levering, and mobile pushing.
+
+\paragraph{Regimes.}
+The seven non-smooth regimes are nominal contact, impact onset, stick-slip transition, unilateral lift-off, contact jamming, release snap, and combined contact shock.
+
+\paragraph{Splits.}
+The deployment splits are nominal, seen shift, unseen geometry, unseen friction, and combined stress.
+
+\paragraph{Methods.}
+The comparison set includes no-contact behavior cloning, domain randomization, diffusion-policy surrogate, robotics-transformer surrogate, ensemble disagreement planning, conformal risk filtering, complementarity residual planning, the proposed contact-mode boundary atlas, and an oracle contact-mode supervisor.
+
+\paragraph{Metrics.}
+We report task success, contact-mode F1, boundary error, unsafe impulse rate, jam rate, slip overshoot, intervention cost, data-efficiency proxy, regret to oracle, paired seed differences, stress sweeps, ablations, and failure cases.
+
+\section{Results}
+\input{../results/combined_stress_table.tex}
+
+The strongest non-oracle baseline is \texttt{complementarity\_residual\_planner}. The proposed method improves combined-stress success by $0.076 \pm 0.007$ in paired seed comparisons and wins 7/7 seeds. The oracle remains higher at $0.628 \pm 0.005$, so the local benchmark is not saturated.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{../figures/nonsmooth_contact_combined_success.png}
+\caption{Combined-stress success with 95\% confidence intervals. The proposed atlas clears all non-oracle baselines but remains below the oracle.}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{../figures/nonsmooth_contact_diagnostics.png}
+\caption{Contact-mode diagnostics under combined stress. The proposed method improves mode F1 and lowers boundary, unsafe impulse, jam, and slip metrics relative to the strongest non-oracle baseline.}
+\end{figure}
+
+\input{../results/pairwise_decision_table.tex}
+
+\section{Ablations and stress tests}
+\input{../results/ablation_table.tex}
+
+The best removed-component ablation is \texttt{minus\_diagnostic\_micro\_probe}; the full method remains ahead by $0.027$ success. Removing the contact-mode classifier, complementarity residual, impulse budget guard, stick-slip hysteresis, or diagnostic probe produces distinct degradation, supporting the mechanism-level claim.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{../figures/nonsmooth_contact_ablation.png}
+\caption{Ablations under combined non-smooth stress. The full contact-mode atlas remains above every removed-component variant.}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{../figures/nonsmooth_contact_stress_sweep.png}
+\caption{Stress sweep over non-smooth contact intensity. The proposed atlas stays above diffusion, conformal, and complementarity baselines across the generated stress range.}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\linewidth]{../figures/nonsmooth_contact_safety_regret.png}
+\caption{Unsafe impulse and regret to the oracle under combined stress. The proposed method lowers regret without increasing unsafe impulses relative to the strongest non-oracle baseline.}
+\end{figure}
+
+\section{Failure cases}
+The failure-case CSV records four important limitations. The atlas still struggles when hidden soft-material deformation changes contact without observable boundary evidence, when the language or task goal changes, when sensor dropout hides an impact, and when the oracle contact-mode supervisor reveals remaining headroom. These failures are useful because they narrow the next empirical version: it needs tactile/deformable-state estimation, instruction grounding, sensor-health modeling, and external validation.
+
+\section{Hostile prior-work boundary}
+The paper's broad neighborhood is crowded. Non-smooth contact dynamics, implicit time stepping, complementarity contact models, MuJoCo-style simulation, contact dynamics learning, diffusion policies, and robotics transformers all pressure the contribution \citep{moreau1999nonsmooth,stewart1996implicit,anitescu1997formulating,todorov2012mujoco,pfrommer2020contactnets,chi2023diffusion,brohan2022rt1,brohan2023rt2}. The defensible boundary is therefore narrow: we do not claim a new contact solver or superiority over trained external foundation policies. We claim that an explicit contact-mode boundary audit is locally useful for preventing smooth policy interpolation across non-smooth mechanics events.
+
+\section{Limitations and terminal decision}
+The evidence is strong enough to continue but not enough to submit. The limitations are material:
 \begin{itemize}
-\item Modeling Large Sliding Frictional Contact Along Non-Smooth Discontinuities in X-FEM (2011)
-\item An Efficient Spring Model Based on a Curved Beam with Non-Smooth Contact Mechanics for Valve Train Simulations (2010)
-\item Generalization of hyperbolic smoothing approach for non-smooth and non-Lipschitz functions (2022)
-\item Simulation of a Valve Train Using Non-Smooth Mechanics (2008)
-\item A variational-based non-smooth contact dynamics approach for the seismic analysis of historical masonry structures (2024)
+\item the benchmark is local and generated;
+\item no real robot or independent high-fidelity simulator has been used;
+\item the diffusion and transformer policies are surrogates, not external trained checkpoints;
+\item there are no hardware videos, qualitative rollouts, or deployment logs;
+\item the oracle gap remains nontrivial.
 \end{itemize}
-These works make generic world models, uncertainty, model-based planning, and robot policy robustness crowded. Without real empirical evidence, the remaining novelty boundary is too weak for ICLR main.
 
-\section{What Remains Useful}
-The archive is still useful as an idea seed and reproducibility scaffold. The synthetic code, stress-test CSVs, reviewer attacks, and novelty-boundary docs can inform a future project. The correct next step is not more paper polishing; it is new evidence: implemented models, real baselines, manual related work, and robot or high-fidelity simulator validation.
+The terminal decision for this rebuild is \textbf{STRONG\_REVISE}. The next honest version must reproduce the contact-mode boundary advantage on real robots or accepted high-fidelity benchmarks with trained policy baselines. Without that evidence, the paper should not be submitted to ICLR main.
 
-\section{Terminal Action}
-Decision: \textbf{KILL/ARCHIVE for ICLR main}. Do not submit this paper to ICLR main in the current form. Revival requires a substantially new empirical project.
+\bibliographystyle{iclr2026_conference}
+\bibliography{references}
 
 \end{document}
