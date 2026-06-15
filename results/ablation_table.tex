@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Ablation results under combined non-smooth stress.}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+Ablation & Succ. & CI & ModeF1 & BoundErr & Unsafe & Jam \\
+\midrule
+Full & 0.533 & 0.007 & 0.631 & 0.246 & 0.065 & 0.092 \\
+NoProbe & 0.506 & 0.010 & 0.575 & 0.278 & 0.075 & 0.114 \\
+NoHysteresis & 0.505 & 0.008 & 0.543 & 0.276 & 0.073 & 0.100 \\
+NoResidual & 0.504 & 0.006 & 0.535 & 0.275 & 0.072 & 0.099 \\
+NoImpulseGuard & 0.497 & 0.007 & 0.587 & 0.262 & 0.090 & 0.100 \\
+NoModeCls & 0.477 & 0.004 & 0.470 & 0.293 & 0.071 & 0.111 \\
+CompOnly & 0.462 & 0.007 & 0.494 & 0.294 & 0.079 & 0.112 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

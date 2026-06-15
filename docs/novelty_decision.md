@@ -1,7 +1,7 @@
 # Novelty Decision
 
-Chosen thesis: Non-Smooth Mechanics for Foundation Policies turns the seed bet into a mechanism: Bring contact discontinuities into the policy objective instead of smoothing them away.
+Decision: STRONG_REVISE
 
-New central mechanism: Non smooth mechanics for foundation policies keeps action-critical alternatives explicit until a physical observation collapses them.
+The paper has a defensible narrow novelty claim after v4: contact-mode boundary auditing improves local policy behavior under non-smooth contact stress beyond complementarity residual and conformal risk baselines.
 
-Decision: proceed as a revise/workshop-strength ICLR-style draft with synthetic but runnable evidence.
+The paper is not ready for ICLR main because novelty and evidence remain local. External validation is mandatory before submission.

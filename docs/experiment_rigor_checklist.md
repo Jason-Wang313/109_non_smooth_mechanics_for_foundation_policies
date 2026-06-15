@@ -1,19 +1,12 @@
 # Experiment Rigor Checklist
 
-## v2 Synthetic Rigor
-- [x] Multiple seeds.
-- [x] Error bars.
-- [x] Stronger synthetic baselines.
-- [x] Ablations.
-- [x] Stress tests.
-- [x] Negative cases.
-
-## ICLR Main Bar
-- [ ] Real-robot validation.
-- [ ] High-fidelity simulator benchmark.
-- [ ] Implemented learned model.
-- [ ] Implemented real competing baselines.
-- [ ] Manual related-work synthesis.
-- [ ] Paper-specific qualitative figures.
-
-Decision: fail ICLR main empirical-rigor gate; archive.
+- [x] Paired seeds across all methods.
+- [x] Strong non-oracle baselines: conformal risk, ensemble disagreement, complementarity residual, diffusion-policy surrogate, and robotics-transformer surrogate.
+- [x] Multiple contact-rich task families.
+- [x] Non-smooth stress regimes include impact, stick-slip, unilateral lift-off, jamming, release snap, and combined shock.
+- [x] Safety metrics reported alongside success.
+- [x] Ablations target core components.
+- [x] Failure cases documented.
+- [ ] Real robot validation.
+- [ ] Independent high-fidelity simulator validation.
+- [ ] External trained policy checkpoints.

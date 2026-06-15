@@ -1,0 +1,5 @@
+case,stress_split,observed_failure,success_rate,lesson
+soft_material_hidden_deformation,combined_stress,mode atlas predicts stick but object internally deforms,0.392,requires tactile or deformable-state estimation
+semantic_goal_change,unseen_geometry,correct contact mode still executes the wrong task intent,0.438,non-smooth mechanics does not solve instruction ambiguity
+sensor_dropout_during_impact,unseen_friction,diagnostic probe cannot observe the impact boundary,0.421,needs sensor-health modeling or guarded recovery
+oracle_remaining_gap,combined_stress,oracle contact-mode supervisor still higher than proposed,0.54,boundary atlas is useful but not saturated
