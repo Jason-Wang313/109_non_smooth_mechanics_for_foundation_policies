@@ -3,3 +3,7 @@ soft_material_hidden_deformation,combined_stress,mode atlas predicts stick but o
 semantic_goal_change,unseen_geometry,correct contact mode still executes the wrong task intent,0.438,non-smooth mechanics does not solve instruction ambiguity
 sensor_dropout_during_impact,unseen_friction,diagnostic probe cannot observe the impact boundary,0.421,needs sensor-health modeling or guarded recovery
 oracle_remaining_gap,combined_stress,oracle contact-mode supervisor still higher than proposed,0.54,boundary atlas is useful but not saturated
+fixture_compliance_shift,unseen_geometry,rigid contact-mode assumptions miss compliant fixture motion,0.447,needs compliance-aware contact states or calibrated fixtures
+friction_memory_aliasing,unseen_friction,stick-slip history aliases with a visually identical surface state,0.418,requires tactile memory or active friction identification
+diagnostic_probe_latency,impact_onset,micro-probe delays action until the contact boundary has already changed,0.431,needs latency-aware probing and rollback policies
+long_horizon_mode_cascade,combined_stress,early correct contact choice creates a later jam after object reorientation,0.405,local contact audits need long-horizon recovery planning

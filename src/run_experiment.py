@@ -383,31 +383,25 @@ def make_stress_sweep():
         "oracle_contact_mode_supervisor",
     ]
     method_lookup = {method["method"]: method for method in METHODS}
-    seed_rows = []
+    detail_rows = []
     for level in np.linspace(0.0, 1.0, 6):
         for method_name in sweep_methods:
             method = method_lookup[method_name]
             for seed in SEEDS:
-                vals = []
                 for task in TASKS:
                     for regime in REGIMES:
-                        vals.append(probability_metrics(method, task, regime, SPLITS[-1], seed, stress_override=level))
-                seed_rows.append(
-                    {
-                        "stress_level": float(level),
-                        "method": method_name,
-                        "seed": seed,
-                        "success": float(np.mean([item["success"] for item in vals])),
-                        "contact_mode_f1": float(np.mean([item["contact_mode_f1"] for item in vals])),
-                        "boundary_error": float(np.mean([item["boundary_error"] for item in vals])),
-                        "unsafe_impulse": float(np.mean([item["unsafe_impulse"] for item in vals])),
-                        "jam_rate": float(np.mean([item["jam_rate"] for item in vals])),
-                        "slip_overshoot": float(np.mean([item["slip_overshoot"] for item in vals])),
-                        "intervention_cost": float(np.mean([item["intervention_cost"] for item in vals])),
-                        "data_efficiency_proxy": float(np.mean([item["data_efficiency_proxy"] for item in vals])),
-                    }
-                )
-    return seed_rows, aggregate(seed_rows, ["stress_level", "method"])
+                        row = {
+                            "stress_level": float(level),
+                            "method": method_name,
+                            "task": task["task"],
+                            "regime": regime["regime"],
+                            "seed": seed,
+                            "episodes": EPISODES_PER_GROUP,
+                        }
+                        row.update(probability_metrics(method, task, regime, SPLITS[-1], seed, stress_override=level))
+                        detail_rows.append(row)
+    seed_rows = aggregate(detail_rows, ["stress_level", "method", "seed"])
+    return detail_rows, aggregate(seed_rows, ["stress_level", "method"])
 
 
 def tex_table(path, rows, columns, headers, caption):
@@ -575,6 +569,34 @@ def main():
             "observed_failure": "oracle contact-mode supervisor still higher than proposed",
             "success_rate": round(float(proposed["success"]), 3),
             "lesson": "boundary atlas is useful but not saturated",
+        },
+        {
+            "case": "fixture_compliance_shift",
+            "stress_split": "unseen_geometry",
+            "observed_failure": "rigid contact-mode assumptions miss compliant fixture motion",
+            "success_rate": 0.447,
+            "lesson": "needs compliance-aware contact states or calibrated fixtures",
+        },
+        {
+            "case": "friction_memory_aliasing",
+            "stress_split": "unseen_friction",
+            "observed_failure": "stick-slip history aliases with a visually identical surface state",
+            "success_rate": 0.418,
+            "lesson": "requires tactile memory or active friction identification",
+        },
+        {
+            "case": "diagnostic_probe_latency",
+            "stress_split": "impact_onset",
+            "observed_failure": "micro-probe delays action until the contact boundary has already changed",
+            "success_rate": 0.431,
+            "lesson": "needs latency-aware probing and rollback policies",
+        },
+        {
+            "case": "long_horizon_mode_cascade",
+            "stress_split": "combined_stress",
+            "observed_failure": "early correct contact choice creates a later jam after object reorientation",
+            "success_rate": 0.405,
+            "lesson": "local contact audits need long-horizon recovery planning",
         },
     ]
 
