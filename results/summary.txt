@@ -1,52 +1,82 @@
-Paper 109 non_smooth_mechanics_for_foundation_policies evidence rebuild
-Design: 5 tasks x 7 non-smooth regimes x 5 splits x 9 methods, 7 seeds, 84 episodes/group.
-Terminal decision: STRONG_REVISE
-Rationale: local contact-mode evidence supports the mechanism only if all gates pass; real robot/external validation remains missing.
+Paper 109 non_smooth_mechanics_for_foundation_policies v5 expanded evidence rebuild
+Design: 8 tasks x 10 regimes x 8 splits x 16 methods, 10 seeds, 6 episodes/cell.
+Terminal decision: KILL_ARCHIVE
+ICLR main ready: False
+Rationale: expanded local non-smooth mechanics evidence fails at least one frozen empirical gate
 
-Combined-stress ranking:
-oracle_contact_mode_supervisor: success=0.628 +/- 0.005, mode_f1=0.722, boundary_error=0.226, unsafe_impulse=0.046, jam_rate=0.093, slip_overshoot=0.039, cost=0.202, regret=0.000
-proposed_contact_mode_boundary_atlas: success=0.540 +/- 0.004, mode_f1=0.630, boundary_error=0.246, unsafe_impulse=0.064, jam_rate=0.092, slip_overshoot=0.057, cost=0.217, regret=0.088
-complementarity_residual_planner: success=0.463 +/- 0.007, mode_f1=0.495, boundary_error=0.294, unsafe_impulse=0.079, jam_rate=0.112, slip_overshoot=0.076, cost=0.264, regret=0.165
-ensemble_disagreement_planner: success=0.434 +/- 0.004, mode_f1=0.409, boundary_error=0.317, unsafe_impulse=0.084, jam_rate=0.117, slip_overshoot=0.096, cost=0.260, regret=0.194
-robotics_transformer_surrogate: success=0.427 +/- 0.004, mode_f1=0.342, boundary_error=0.342, unsafe_impulse=0.112, jam_rate=0.126, slip_overshoot=0.115, cost=0.181, regret=0.201
-conformal_risk_filter: success=0.425 +/- 0.004, mode_f1=0.392, boundary_error=0.323, unsafe_impulse=0.070, jam_rate=0.119, slip_overshoot=0.096, cost=0.290, regret=0.202
-diffusion_policy_surrogate: success=0.411 +/- 0.002, mode_f1=0.319, boundary_error=0.349, unsafe_impulse=0.117, jam_rate=0.130, slip_overshoot=0.119, cost=0.171, regret=0.217
-domain_randomization: success=0.386 +/- 0.004, mode_f1=0.294, boundary_error=0.356, unsafe_impulse=0.113, jam_rate=0.132, slip_overshoot=0.119, cost=0.161, regret=0.242
-no_contact_behavior_clone: success=0.314 +/- 0.006, mode_f1=0.210, boundary_error=0.381, unsafe_impulse=0.125, jam_rate=0.139, slip_overshoot=0.133, cost=0.153, regret=0.314
+Hard-aggregate ranking:
+oracle_hybrid_contact_supervisor: success=0.6990, utility=0.7705, mode_f1=0.6082, boundary_error=0.1627, unsafe_impulse=0.0033, regret=0.0000
+oracle_contact_mode_supervisor: success=0.6946, utility=0.7571, mode_f1=0.5837, boundary_error=0.1774, unsafe_impulse=0.0096, regret=0.0194
+contact_mode_boundary_audit_v5: success=0.6608, utility=0.7235, mode_f1=0.5720, boundary_error=0.1722, unsafe_impulse=0.0119, regret=0.0413
+proposed_contact_mode_boundary_atlas_v4: success=0.5921, utility=0.6307, mode_f1=0.4961, boundary_error=0.2128, unsafe_impulse=0.0295, regret=0.1069
+robust_hybrid_mpc: success=0.5363, utility=0.5568, mode_f1=0.4172, boundary_error=0.2440, unsafe_impulse=0.0338, regret=0.1627
+complementarity_residual_planner: success=0.5204, utility=0.5329, mode_f1=0.4044, boundary_error=0.2542, unsafe_impulse=0.0433, regret=0.1785
+learned_contact_classifier: success=0.5242, utility=0.5305, mode_f1=0.4138, boundary_error=0.2533, unsafe_impulse=0.0473, regret=0.1748
+contact_implicit_mpc: success=0.5098, utility=0.5158, mode_f1=0.3809, boundary_error=0.2615, unsafe_impulse=0.0455, regret=0.1892
+energy_barrier_policy: success=0.5037, utility=0.5111, mode_f1=0.3555, boundary_error=0.2669, unsafe_impulse=0.0364, regret=0.1952
+ensemble_disagreement_planner: success=0.5062, utility=0.5041, mode_f1=0.3424, boundary_error=0.2733, unsafe_impulse=0.0423, regret=0.1927
+conformal_risk_filter: success=0.4994, utility=0.5001, mode_f1=0.3277, boundary_error=0.2771, unsafe_impulse=0.0330, regret=0.1996
+robotics_transformer_surrogate: success=0.4727, utility=0.4386, mode_f1=0.2704, boundary_error=0.3056, unsafe_impulse=0.0671, regret=0.2263
+diffusion_policy_surrogate: success=0.4573, utility=0.4162, mode_f1=0.2501, boundary_error=0.3150, unsafe_impulse=0.0716, regret=0.2417
+smooth_dynamics_world_model: success=0.4498, utility=0.4095, mode_f1=0.2447, boundary_error=0.3135, unsafe_impulse=0.0683, regret=0.2492
+domain_randomization: success=0.4308, utility=0.3891, mode_f1=0.2354, boundary_error=0.3174, unsafe_impulse=0.0708, regret=0.2681
+no_contact_behavior_clone: success=0.3485, utility=0.2871, mode_f1=0.1624, boundary_error=0.3454, unsafe_impulse=0.0831, regret=0.3504
 
 Gate outcomes:
 success_gate: True
 diagnostic_gate: True
 safety_gate: True
 pairwise_gate: True
-ablation_gate: True
-success_margin_vs_strongest: 0.07633624878522838
-contact_mode_f1_delta_vs_strongest: 0.13533059490916527
-boundary_error_delta_vs_strongest: -0.04863656454821516
-unsafe_impulse_delta_vs_strongest: -0.01489718210904449
-jam_rate_delta_vs_strongest: -0.020752406447392277
-slip_overshoot_delta_vs_strongest: -0.018764087997111593
-intervention_cost_delta_vs_strongest: -0.047107999999999955
-ablation_margin_vs_best_removed_component: 0.027162293488824263
-strongest_non_oracle_baseline: complementarity_residual_planner
-best_removed_component: minus_diagnostic_micro_probe
-oracle_success: 0.628
+ablation_gate: False
+stress_gate: True
+fixed_risk_gate: True
+scope_gate: False
+success_margin_vs_strongest: 0.06875000000000009
+utility_margin_vs_strongest: 0.09277013508757304
+contact_mode_f1_delta_vs_strongest: 0.07588358125489303
+boundary_error_delta_vs_strongest: -0.04067608779808929
+impulse_violation_delta_vs_strongest: -0.01444764600265147
+unsafe_impulse_delta_vs_strongest: -0.017558579485828153
+jam_rate_delta_vs_strongest: -0.017401329144905903
+slip_overshoot_delta_vs_strongest: -0.015391958571178959
+mode_switch_latency_delta_vs_strongest: -0.01958258098998078
+energy_spike_delta_vs_strongest: -0.02586908847704303
+calibration_ece_delta_vs_strongest: -0.02364542162657646
+intervention_cost_delta_vs_strongest: 0.009773875106518337
+ablation_success_margin_vs_best_removed_component: -0.006249999999999978
+ablation_utility_margin_vs_best_removed_component: 0.0031827179299074304
+stress_utility_margin_at_max_stress: 0.09609425811798689
+strict_fixed_risk_coverage: 0.9280302724524881
+strict_fixed_risk_utility_margin: 0.12354146334521954
+strongest_non_oracle_baseline: proposed_contact_mode_boundary_atlas_v4
+best_removed_component_success: minus_mode_switch_latency_guard
+best_removed_component_utility: minus_mode_switch_latency_guard
 
 Pairwise proposed comparisons:
-complementarity_residual_planner: diff=0.076 +/- 0.007, wins=7/7, decision=proposed_better
-conformal_risk_filter: diff=0.114 +/- 0.004, wins=7/7, decision=proposed_better
-diffusion_policy_surrogate: diff=0.128 +/- 0.004, wins=7/7, decision=proposed_better
-domain_randomization: diff=0.154 +/- 0.007, wins=7/7, decision=proposed_better
-ensemble_disagreement_planner: diff=0.105 +/- 0.007, wins=7/7, decision=proposed_better
-no_contact_behavior_clone: diff=0.225 +/- 0.008, wins=7/7, decision=proposed_better
-oracle_contact_mode_supervisor: diff=-0.088 +/- 0.007, wins=0/7, decision=not_decisive
-robotics_transformer_surrogate: diff=0.112 +/- 0.003, wins=7/7, decision=proposed_better
+complementarity_residual_planner: success_diff=0.1404, utility_diff=0.1905, utility_wins=10/10, decision=proposed_better
+conformal_risk_filter: success_diff=0.1615, utility_diff=0.2234, utility_wins=10/10, decision=proposed_better
+contact_implicit_mpc: success_diff=0.1510, utility_diff=0.2077, utility_wins=10/10, decision=proposed_better
+diffusion_policy_surrogate: success_diff=0.2035, utility_diff=0.3073, utility_wins=10/10, decision=proposed_better
+domain_randomization: success_diff=0.2300, utility_diff=0.3343, utility_wins=10/10, decision=proposed_better
+energy_barrier_policy: success_diff=0.1571, utility_diff=0.2124, utility_wins=10/10, decision=proposed_better
+ensemble_disagreement_planner: success_diff=0.1546, utility_diff=0.2194, utility_wins=10/10, decision=proposed_better
+learned_contact_classifier: success_diff=0.1367, utility_diff=0.1930, utility_wins=10/10, decision=proposed_better
+no_contact_behavior_clone: success_diff=0.3123, utility_diff=0.4364, utility_wins=10/10, decision=proposed_better
+oracle_contact_mode_supervisor: success_diff=-0.0338, utility_diff=-0.0336, utility_wins=3/10, decision=not_decisive
+oracle_hybrid_contact_supervisor: success_diff=-0.0381, utility_diff=-0.0470, utility_wins=1/10, decision=not_decisive
+proposed_contact_mode_boundary_atlas_v4: success_diff=0.0687, utility_diff=0.0928, utility_wins=10/10, decision=proposed_better
+robotics_transformer_surrogate: success_diff=0.1881, utility_diff=0.2849, utility_wins=10/10, decision=proposed_better
+robust_hybrid_mpc: success_diff=0.1246, utility_diff=0.1667, utility_wins=10/10, decision=proposed_better
+smooth_dynamics_world_model: success_diff=0.2110, utility_diff=0.3140, utility_wins=10/10, decision=proposed_better
 
 Ablations:
-full_contact_mode_boundary_atlas: success=0.533 +/- 0.007, mode_f1=0.631, boundary_error=0.246, unsafe_impulse=0.065, note=all components
-minus_diagnostic_micro_probe: success=0.506 +/- 0.010, mode_f1=0.575, boundary_error=0.278, unsafe_impulse=0.075, note=does not actively disambiguate contact modes
-minus_stick_slip_hysteresis: success=0.505 +/- 0.008, mode_f1=0.543, boundary_error=0.276, unsafe_impulse=0.073, note=oscillates across stick-slip modes
-minus_complementarity_residual: success=0.504 +/- 0.006, mode_f1=0.535, boundary_error=0.275, unsafe_impulse=0.072, note=accepts physically impossible smooth predictions
-minus_impulse_budget_guard: success=0.497 +/- 0.007, mode_f1=0.587, boundary_error=0.262, unsafe_impulse=0.090, note=over-commits near impact onset
-minus_contact_mode_classifier: success=0.477 +/- 0.004, mode_f1=0.470, boundary_error=0.293, unsafe_impulse=0.071, note=cannot localize contact-mode boundaries
-complementarity_only: success=0.462 +/- 0.007, mode_f1=0.494, boundary_error=0.294, unsafe_impulse=0.079, note=complementarity residual baseline
+full_contact_mode_boundary_audit_v5: success=0.6477, utility=0.7109, note=all components
+minus_mode_switch_latency_guard: success=0.6540, utility=0.7078, note=delays or mistimes action near fast mode transitions
+minus_energy_barrier_check: success=0.6533, utility=0.7073, note=misses stored-energy release and barrier violations
+minus_impulse_guard: success=0.6408, utility=0.6959, note=over-commits near impact onset
+minus_stick_slip_hysteresis: success=0.6342, utility=0.6918, note=oscillates across stick-slip modes
+minus_fixed_risk_acceptor: success=0.6442, utility=0.6907, note=does not tune acceptance to deployment risk budgets
+minus_complementarity_residual: success=0.6433, utility=0.6863, note=accepts physically impossible smooth predictions
+minus_compliance_estimator: success=0.6292, utility=0.6814, note=misses compliant fixture and deformable-object shifts
+minus_diagnostic_micro_probe: success=0.6300, utility=0.6812, note=does not actively disambiguate ambiguous contact states
+minus_contact_mode_classifier: success=0.5969, utility=0.6328, note=cannot localize contact-mode boundaries

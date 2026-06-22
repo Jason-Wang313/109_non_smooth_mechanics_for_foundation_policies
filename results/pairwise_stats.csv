@@ -1,9 +1,0 @@
-baseline,mean_success_diff,ci95_success_diff,wins,total,decision,strongest_non_oracle
-complementarity_residual_planner,0.0763,0.0071,7,7,proposed_better,True
-conformal_risk_filter,0.1142,0.0044,7,7,proposed_better,False
-diffusion_policy_surrogate,0.1283,0.0044,7,7,proposed_better,False
-domain_randomization,0.1541,0.0071,7,7,proposed_better,False
-ensemble_disagreement_planner,0.1053,0.0075,7,7,proposed_better,False
-no_contact_behavior_clone,0.2255,0.0076,7,7,proposed_better,False
-oracle_contact_mode_supervisor,-0.0883,0.0066,0,7,not_decisive,False
-robotics_transformer_surrogate,0.1122,0.0032,7,7,proposed_better,False

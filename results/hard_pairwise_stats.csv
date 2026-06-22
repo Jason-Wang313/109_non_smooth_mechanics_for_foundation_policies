@@ -1,0 +1,16 @@
+baseline,is_strongest_non_oracle,mean_success_diff,ci95_success_diff,wins_success_over_seeds,mean_utility_diff,ci95_utility_diff,wins_utility_over_seeds,seeds,decision
+complementarity_residual_planner,no,0.140417,0.018243,10,0.190544,0.017111,10,10,proposed_better
+conformal_risk_filter,no,0.161458,0.023404,10,0.223354,0.02193,10,10,proposed_better
+contact_implicit_mpc,no,0.151042,0.024381,10,0.207692,0.022953,10,10,proposed_better
+diffusion_policy_surrogate,no,0.203542,0.017975,10,0.30729,0.017486,10,10,proposed_better
+domain_randomization,no,0.23,0.026569,10,0.334347,0.025441,10,10,proposed_better
+energy_barrier_policy,no,0.157083,0.022647,10,0.21235,0.021925,10,10,proposed_better
+ensemble_disagreement_planner,no,0.154583,0.021312,10,0.219373,0.020636,10,10,proposed_better
+learned_contact_classifier,no,0.136667,0.01967,10,0.193006,0.019237,10,10,proposed_better
+no_contact_behavior_clone,no,0.312292,0.020202,10,0.436351,0.018847,10,10,proposed_better
+oracle_contact_mode_supervisor,no,-0.03375,0.028601,3,-0.033604,0.026701,3,10,not_decisive
+oracle_hybrid_contact_supervisor,no,-0.038125,0.021744,1,-0.047037,0.020862,1,10,not_decisive
+proposed_contact_mode_boundary_atlas_v4,yes,0.06875,0.023354,10,0.09277,0.022507,10,10,proposed_better
+robotics_transformer_surrogate,no,0.188125,0.025486,10,0.284931,0.024392,10,10,proposed_better
+robust_hybrid_mpc,no,0.124583,0.015671,10,0.166713,0.0145,10,10,proposed_better
+smooth_dynamics_world_model,no,0.211042,0.025392,10,0.31396,0.024194,10,10,proposed_better

@@ -1,9 +1,25 @@
-case,stress_split,observed_failure,success_rate,lesson
-soft_material_hidden_deformation,combined_stress,mode atlas predicts stick but object internally deforms,0.392,requires tactile or deformable-state estimation
-semantic_goal_change,unseen_geometry,correct contact mode still executes the wrong task intent,0.438,non-smooth mechanics does not solve instruction ambiguity
-sensor_dropout_during_impact,unseen_friction,diagnostic probe cannot observe the impact boundary,0.421,needs sensor-health modeling or guarded recovery
-oracle_remaining_gap,combined_stress,oracle contact-mode supervisor still higher than proposed,0.54,boundary atlas is useful but not saturated
-fixture_compliance_shift,unseen_geometry,rigid contact-mode assumptions miss compliant fixture motion,0.447,needs compliance-aware contact states or calibrated fixtures
-friction_memory_aliasing,unseen_friction,stick-slip history aliases with a visually identical surface state,0.418,requires tactile memory or active friction identification
-diagnostic_probe_latency,impact_onset,micro-probe delays action until the contact boundary has already changed,0.431,needs latency-aware probing and rollback policies
-long_horizon_mode_cascade,combined_stress,early correct contact choice creates a later jam after object reorientation,0.405,local contact audits need long-horizon recovery planning
+case_id,task,regime,strongest_baseline,proposed_success,baseline_success,success_gap,proposed_boundary_error,proposed_unsafe_impulse,lesson
+1,bimanual_alignment,unilateral_lift_off,proposed_contact_mode_boundary_atlas_v4,0.6,0.716667,-0.116667,0.17128,0.010585,hidden compliance can change mode without a clean visual boundary
+2,legged_foot_placement,friction_cone_inversion,proposed_contact_mode_boundary_atlas_v4,0.55,0.666667,-0.116667,0.173321,0.012639,diagnostic probing can be too slow near impact onset
+3,cable_routing,actuator_backlash,proposed_contact_mode_boundary_atlas_v4,0.583333,0.683333,-0.1,0.17383,0.017711,stick-slip history aliases visually identical states
+4,tool_levering,unilateral_lift_off,proposed_contact_mode_boundary_atlas_v4,0.566667,0.666667,-0.1,0.168214,0.009311,local mode correctness can still create long-horizon jamming
+5,deformable_press_fit,mixed_non_smooth_shock,proposed_contact_mode_boundary_atlas_v4,0.5,0.6,-0.1,0.184131,0.018235,energy release can dominate the complementarity residual
+6,tool_levering,friction_cone_inversion,proposed_contact_mode_boundary_atlas_v4,0.533333,0.633333,-0.1,0.17063,0.012574,sensor dropout weakens the boundary atlas
+7,mobile_pushing,actuator_backlash,proposed_contact_mode_boundary_atlas_v4,0.633333,0.716667,-0.083333,0.175509,0.01388,deformable contact requires tactile state estimates
+8,tool_levering,stick_slip_transition,proposed_contact_mode_boundary_atlas_v4,0.6,0.666667,-0.066667,0.170248,0.011769,oracle headroom remains significant
+9,peg_insertion,friction_cone_inversion,proposed_contact_mode_boundary_atlas_v4,0.6,0.666667,-0.066667,0.166472,0.011216,hidden compliance can change mode without a clean visual boundary
+10,tool_levering,mixed_non_smooth_shock,proposed_contact_mode_boundary_atlas_v4,0.566667,0.616667,-0.05,0.183549,0.017793,diagnostic probing can be too slow near impact onset
+11,bimanual_alignment,nominal_contact,proposed_contact_mode_boundary_atlas_v4,0.633333,0.666667,-0.033333,0.161845,0.001789,stick-slip history aliases visually identical states
+12,tool_levering,nominal_contact,proposed_contact_mode_boundary_atlas_v4,0.616667,0.65,-0.033333,0.159496,0.001128,local mode correctness can still create long-horizon jamming
+13,deformable_press_fit,impact_onset,proposed_contact_mode_boundary_atlas_v4,0.65,0.683333,-0.033333,0.172961,0.014393,energy release can dominate the complementarity residual
+14,legged_foot_placement,unilateral_lift_off,proposed_contact_mode_boundary_atlas_v4,0.6,0.633333,-0.033333,0.170806,0.011595,sensor dropout weakens the boundary atlas
+15,mobile_pushing,impact_onset,proposed_contact_mode_boundary_atlas_v4,0.633333,0.65,-0.016667,0.171958,0.013815,deformable contact requires tactile state estimates
+16,deformable_press_fit,friction_cone_inversion,proposed_contact_mode_boundary_atlas_v4,0.616667,0.633333,-0.016667,0.171469,0.010355,oracle headroom remains significant
+17,legged_foot_placement,release_snap,proposed_contact_mode_boundary_atlas_v4,0.6,0.6,-0.0,0.177287,0.015292,hidden compliance can change mode without a clean visual boundary
+18,peg_insertion,nominal_contact,proposed_contact_mode_boundary_atlas_v4,0.65,0.65,0.0,0.161569,0.000839,diagnostic probing can be too slow near impact onset
+19,cable_routing,nominal_contact,proposed_contact_mode_boundary_atlas_v4,0.566667,0.566667,0.0,0.162011,0.000498,stick-slip history aliases visually identical states
+20,mobile_pushing,stick_slip_transition,proposed_contact_mode_boundary_atlas_v4,0.55,0.55,0.0,0.16401,0.011647,local mode correctness can still create long-horizon jamming
+21,peg_insertion,contact_jamming,proposed_contact_mode_boundary_atlas_v4,0.6,0.6,0.0,0.172343,0.013692,energy release can dominate the complementarity residual
+22,bimanual_alignment,actuator_backlash,proposed_contact_mode_boundary_atlas_v4,0.583333,0.583333,0.0,0.177882,0.015056,sensor dropout weakens the boundary atlas
+23,drawer_opening,nominal_contact,proposed_contact_mode_boundary_atlas_v4,0.616667,0.6,0.016667,0.157014,0.001419,deformable contact requires tactile state estimates
+24,drawer_opening,unilateral_lift_off,proposed_contact_mode_boundary_atlas_v4,0.683333,0.666667,0.016667,0.164947,0.009606,oracle headroom remains significant
