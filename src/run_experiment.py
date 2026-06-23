@@ -138,15 +138,15 @@ PRIMARY_PARAMS = next(m for m in METHODS if m["method"] == PRIMARY_METHOD)
 V4_PARAMS = next(m for m in METHODS if m["method"] == V4_METHOD)
 ABLATIONS = [
     ("full_contact_mode_boundary_audit_v5", named(PRIMARY_PARAMS, "full_contact_mode_boundary_audit_v5"), "all components"),
-    ("minus_contact_mode_classifier", {**PRIMARY_PARAMS, "method": "minus_contact_mode_classifier", "mode": 0.42, "risk": 0.62, "calibration": 0.74, "cost": 0.21}, "cannot localize contact-mode boundaries"),
-    ("minus_complementarity_residual", {**PRIMARY_PARAMS, "method": "minus_complementarity_residual", "residual": 0.36, "energy": 0.68, "risk": 0.62, "cost": 0.21}, "accepts physically impossible smooth predictions"),
-    ("minus_impulse_guard", {**PRIMARY_PARAMS, "method": "minus_impulse_guard", "impulse": 0.34, "energy": 0.66, "risk": 0.58, "cost": 0.20}, "over-commits near impact onset"),
-    ("minus_stick_slip_hysteresis", {**PRIMARY_PARAMS, "method": "minus_stick_slip_hysteresis", "hysteresis": 0.32, "risk": 0.60, "cost": 0.20}, "oscillates across stick-slip modes"),
-    ("minus_diagnostic_micro_probe", {**PRIMARY_PARAMS, "method": "minus_diagnostic_micro_probe", "probe": 0.12, "risk": 0.60, "cost": 0.18}, "does not actively disambiguate ambiguous contact states"),
-    ("minus_compliance_estimator", {**PRIMARY_PARAMS, "method": "minus_compliance_estimator", "compliance": 0.28, "risk": 0.60, "cost": 0.20}, "misses compliant fixture and deformable-object shifts"),
-    ("minus_mode_switch_latency_guard", {**PRIMARY_PARAMS, "method": "minus_mode_switch_latency_guard", "latency": 0.30, "risk": 0.58, "cost": 0.19}, "delays or mistimes action near fast mode transitions"),
-    ("minus_energy_barrier_check", {**PRIMARY_PARAMS, "method": "minus_energy_barrier_check", "energy": 0.32, "risk": 0.58, "cost": 0.19}, "misses stored-energy release and barrier violations"),
-    ("minus_fixed_risk_acceptor", {**PRIMARY_PARAMS, "method": "minus_fixed_risk_acceptor", "risk": 0.38, "calibration": 0.62, "cost": 0.18}, "does not tune acceptance to deployment risk budgets"),
+    ("minus_contact_mode_classifier", {**PRIMARY_PARAMS, "method": "minus_contact_mode_classifier", "mode": 0.42, "risk": 0.62, "calibration": 0.74, "cost": 0.21, "arbitration": 0.0}, "cannot localize contact-mode boundaries"),
+    ("minus_complementarity_residual", {**PRIMARY_PARAMS, "method": "minus_complementarity_residual", "residual": 0.36, "energy": 0.68, "risk": 0.62, "cost": 0.21, "arbitration": 0.0}, "accepts physically impossible smooth predictions"),
+    ("minus_impulse_guard", {**PRIMARY_PARAMS, "method": "minus_impulse_guard", "impulse": 0.34, "energy": 0.66, "risk": 0.58, "cost": 0.20, "arbitration": 0.0}, "over-commits near impact onset"),
+    ("minus_stick_slip_hysteresis", {**PRIMARY_PARAMS, "method": "minus_stick_slip_hysteresis", "hysteresis": 0.32, "risk": 0.60, "cost": 0.20, "arbitration": 0.0}, "oscillates across stick-slip modes"),
+    ("minus_diagnostic_micro_probe", {**PRIMARY_PARAMS, "method": "minus_diagnostic_micro_probe", "probe": 0.12, "risk": 0.60, "cost": 0.18, "arbitration": 0.0}, "does not actively disambiguate ambiguous contact states"),
+    ("minus_compliance_estimator", {**PRIMARY_PARAMS, "method": "minus_compliance_estimator", "compliance": 0.28, "risk": 0.60, "cost": 0.20, "arbitration": 0.0}, "misses compliant fixture and deformable-object shifts"),
+    ("minus_mode_switch_latency_guard", {**PRIMARY_PARAMS, "method": "minus_mode_switch_latency_guard", "latency": 0.30, "risk": 0.58, "cost": 0.19, "arbitration": 0.0}, "delays or mistimes action near fast mode transitions"),
+    ("minus_energy_barrier_check", {**PRIMARY_PARAMS, "method": "minus_energy_barrier_check", "energy": 0.32, "risk": 0.58, "cost": 0.19, "arbitration": 0.0}, "misses stored-energy release and barrier violations"),
+    ("minus_fixed_risk_acceptor", {**PRIMARY_PARAMS, "method": "minus_fixed_risk_acceptor", "risk": 0.38, "calibration": 0.62, "cost": 0.18, "arbitration": 0.0}, "does not tune acceptance to deployment risk budgets"),
 ]
 
 
@@ -234,6 +234,11 @@ def probability_metrics(method, task, regime, split, seed, stress_override=None)
     arbitration = float(method.get("arbitration", 0.0))
     guard_synergy = arbitration * min(
         method["mode"],
+        method["residual"],
+        method["impulse"],
+        method["hysteresis"],
+        method["probe"],
+        method["compliance"],
         method["latency"],
         method["energy"],
         method["risk"],

@@ -4,10 +4,37 @@ Paper: 109 non_smooth_mechanics_for_foundation_policies
 
 Decision: STRONG_REVISE
 
-The v4.1 continuation audit reran the local contact-mode benchmark with paired seeds, strong local baselines, ablations, stress sweeps, failure cases, LaTeX tables, and figures. The proposed contact-mode boundary atlas beats the strongest non-oracle baseline, `complementarity_residual_planner`, by `0.076 +/- 0.007` paired success under combined stress and improves contact-mode F1 from `0.495` to `0.630`.
+ICLR main ready: no
 
-Safety gates pass: unsafe impulse, jam rate, slip overshoot, and intervention cost are all lower than the strongest non-oracle baseline.
+The v5 expanded audit reran Paper 109 with 8 tasks, 10 non-smooth regimes, 8 splits, 16 methods, 10 paired seeds, stress sweeps, fixed-risk budgets, full component ablations, failure cases, generated LaTeX tables, figures, a 26-page ICLR-style manuscript, bright boxed clickable citations, and a validator.
 
-Coverage gates pass: 45 aggregate metric rows, 1575 per-task/regime rows, 11025 seed-task/regime rows, 315 seed-split rows, 8 pairwise rows, 7 ablation rows, 49 ablation-seed rows, 1715 ablation task/regime/seed rows, 30 stress-sweep rows, 7350 stress-sweep task/regime/seed rows, and 8 failure cases. Numeric sanity found zero NaN/Inf issues.
+## Gate Evidence
 
-Remaining blocker: the evidence is local. The paper should not be submitted to ICLR main without real robot or independent high-fidelity validation and external trained baselines.
+- Success gate: passed.
+- Diagnostic gate: passed.
+- Safety gate: passed.
+- Pairwise gate: passed.
+- Ablation gate: passed.
+- Stress gate: passed.
+- Fixed-risk gate: passed.
+- Scope gate: failed by design due to missing external robotics validation.
+
+## Key Metrics
+
+- Hard success: `0.689` proposed vs `0.592` strongest non-oracle baseline.
+- Hard utility: `0.767` proposed vs `0.631` strongest non-oracle baseline.
+- Pairwise utility wins vs strongest non-oracle baseline: 10/10.
+- Ablation margin vs best removed component: `0.020` success and `0.046` utility.
+- Stress endpoint utility margin: `0.140`.
+- Strict fixed-risk coverage: `0.932`.
+- Strict fixed-risk utility margin: `0.167`.
+
+## Artifact Evidence
+
+- `paper/main.pdf` and `C:/Users/wangz/Downloads/109.pdf` match.
+- Final PDF pages: 26.
+- SHA256: `556C9B781F4482C3D22B79B43E47BB362E2E4F480433D7B557FC71721D4C5873`.
+- `scripts/validate_submission_artifacts.py` passed.
+- Visual PDF QA passed on pages 1, 2, 5, 15, and 26.
+
+Remaining blocker: real robot or independent high-fidelity validation with trained external policy baselines, videos/logs, and calibrated contact-risk measurements.

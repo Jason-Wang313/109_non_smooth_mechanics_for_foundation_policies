@@ -1,32 +1,36 @@
 # 109 Non-Smooth Mechanics for Foundation Policies
 
-Submission-hardening version: v4.1
+Submission-hardening version: v5 expanded standard
 
 Terminal decision: STRONG_REVISE for ICLR main-conference development.
 
-This continuation audit reruns and hardens the v4 local contact-mode benchmark. The paper is still not ICLR-main-ready because it lacks real robot or independent high-fidelity benchmark validation, but the local evidence supports continuing rather than archiving.
+ICLR main ready: no. The local evidence now supports the mechanism under the expanded standard, but the external robotics scope gate is still false because there is no real-robot or independent high-fidelity validation with trained policy checkpoints.
 
 ## Evidence Snapshot
 
-- Benchmark: 5 tasks x 7 non-smooth regimes x 5 deployment splits x 9 methods.
-- Seeds: 7 paired seeds, 84 episodes per task/regime/split/method group.
-- Strongest non-oracle baseline: `complementarity_residual_planner`.
-- Proposed: `proposed_contact_mode_boundary_atlas`.
-- Combined-stress success: `0.540 +/- 0.004` proposed vs `0.463 +/- 0.007` strongest baseline.
-- Contact-mode F1: `0.630` proposed vs `0.495` strongest baseline.
-- Unsafe impulse: `0.064` proposed vs `0.079` strongest baseline.
-- Pairwise wins: 7/7 seeds over the strongest baseline.
-- Best removed-component ablation: `minus_diagnostic_micro_probe`; full method remains ahead by `0.027` success.
-- Expanded stress-sweep seed/task/regime rows: 7350.
-- Failure cases: 8 documented limitations.
+- Benchmark: 8 tasks x 10 non-smooth regimes x 8 deployment splits x 16 methods.
+- Seeds and rollouts: 10 paired seeds, 6 episodes per cell.
+- Main cells: 102400; stress-sweep cells: 48000; fixed-risk cells: 51200; ablation cells: 8000.
+- Strongest non-oracle baseline: `proposed_contact_mode_boundary_atlas_v4`.
+- Proposed method: `contact_mode_boundary_audit_v5`.
+- Held-out hard success: `0.689` proposed vs `0.592` strongest baseline.
+- Held-out hard utility: `0.767` proposed vs `0.631` strongest baseline.
+- Contact-mode F1 delta: `+0.076`.
+- Boundary-error delta: `-0.041`.
+- Unsafe-impulse delta: `-0.018`.
+- Pairwise utility wins: 10/10 seeds over the strongest non-oracle baseline.
+- Ablation gate: passed; full method beats best removed component by `0.020` success and `0.046` utility.
+- Stress endpoint utility margin: `0.140`.
+- Strict fixed-risk coverage: `0.932`; strict fixed-risk utility margin: `0.167`.
+- Failure cases: 24 documented hard-split limitations.
 
-## Continuation Audit
+## Final Artifacts
 
-- Log: `C:/Users/wangz/robotics_massive_pool_paper_factory/logs/109_non_smooth_mechanics_for_foundation_policies_continuation_rerun_20260615.log`
-- CSV row-count gate: passed for metrics, task/regime seeds, paired stats, ablations, stress sweep, and failure cases.
-- Numeric sanity gate: passed with zero NaN/Inf issues.
-- Artifact rule: final numbered PDF belongs in `C:/Users/wangz/Downloads/109.pdf` only.
-- PDF SHA256: `18B2B2A99CF5BD68DFADC6A4E087493841D3BDFA55520701DCA3A36F5DCC3C0D`.
+- Canonical PDF: `C:/Users/wangz/Downloads/109.pdf`
+- Pages: 26
+- PDF SHA256: `556C9B781F4482C3D22B79B43E47BB362E2E4F480433D7B557FC71721D4C5873`
+- GitHub: `https://github.com/Jason-Wang313/109_non_smooth_mechanics_for_foundation_policies`
+- Numbered PDF location rule: Downloads only; no Desktop/root copy.
 
 ## Reproduce Evidence
 
@@ -34,14 +38,21 @@ This continuation audit reruns and hardens the v4 local contact-mode benchmark. 
 python src\run_experiment.py
 ```
 
-## Rebuild PDF
+## Rebuild Manuscript
 
 ```powershell
+python scripts\generate_manuscript.py
 cd paper
-pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode main.tex
 bibtex main
-pdflatex -interaction=nonstopmode -halt-on-error main.tex
-pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode main.tex
+pdflatex -interaction=nonstopmode main.tex
 ```
 
-Canonical local PDF: `C:/Users/wangz/Downloads/109.pdf`
+## Validate Artifacts
+
+```powershell
+python scripts\validate_submission_artifacts.py
+```
+
+The validator checks row counts, finite numeric CSV values, terminal gates, bright boxed citation settings, 25+ page count, PDF hash match to Downloads, and absence of Desktop/root numbered PDFs.

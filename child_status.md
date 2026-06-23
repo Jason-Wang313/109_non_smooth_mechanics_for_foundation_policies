@@ -1,12 +1,13 @@
 # Child Status 109
 
-Current stage: ICLR main gate terminal
-Last update: 2026-06-15 18:00:22 +0100
+Current stage: v5 expanded submission artifact complete
+Last update: 2026-06-23 Asia/Shanghai
 PDF: C:/Users/wangz/Downloads/109.pdf
-PDF SHA256: 18B2B2A99CF5BD68DFADC6A4E087493841D3BDFA55520701DCA3A36F5DCC3C0D
+PDF pages: 26
+PDF SHA256: 556C9B781F4482C3D22B79B43E47BB362E2E4F480433D7B557FC71721D4C5873
 GitHub: https://github.com/Jason-Wang313/109_non_smooth_mechanics_for_foundation_policies
-Submission-hardening version: v4.1
+Submission-hardening version: v5 expanded standard
 Terminal decision: STRONG_REVISE
 ICLR main ready: no
 
-Reason: 2026-06-15 continuation audit passed code, full rerun, CSV row-count, numeric sanity, strongest-baseline, paired-seed, ablation, stress-sweep, and failure-case gates; local contact-mode benchmark supports the mechanism, but real robot or independent high-fidelity validation is still missing.
+Reason: the v5 CPU-only evidence protocol passes success, diagnostic, safety, pairwise, ablation, stress, and fixed-risk gates. The scope gate remains false because real robot or independent high-fidelity validation with trained policy baselines is missing.

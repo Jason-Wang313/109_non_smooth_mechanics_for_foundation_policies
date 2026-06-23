@@ -1,13 +1,13 @@
 Paper 109 non_smooth_mechanics_for_foundation_policies v5 expanded evidence rebuild
 Design: 8 tasks x 10 regimes x 8 splits x 16 methods, 10 seeds, 6 episodes/cell.
-Terminal decision: KILL_ARCHIVE
+Terminal decision: STRONG_REVISE
 ICLR main ready: False
-Rationale: expanded local non-smooth mechanics evidence fails at least one frozen empirical gate
+Rationale: expanded local non-smooth mechanics evidence supports the mechanism, but the external robotics scope gate fails
 
 Hard-aggregate ranking:
 oracle_hybrid_contact_supervisor: success=0.6990, utility=0.7705, mode_f1=0.6082, boundary_error=0.1627, unsafe_impulse=0.0033, regret=0.0000
+contact_mode_boundary_audit_v5: success=0.6894, utility=0.7673, mode_f1=0.5720, boundary_error=0.1722, unsafe_impulse=0.0119, regret=0.0179
 oracle_contact_mode_supervisor: success=0.6946, utility=0.7571, mode_f1=0.5837, boundary_error=0.1774, unsafe_impulse=0.0096, regret=0.0194
-contact_mode_boundary_audit_v5: success=0.6608, utility=0.7235, mode_f1=0.5720, boundary_error=0.1722, unsafe_impulse=0.0119, regret=0.0413
 proposed_contact_mode_boundary_atlas_v4: success=0.5921, utility=0.6307, mode_f1=0.4961, boundary_error=0.2128, unsafe_impulse=0.0295, regret=0.1069
 robust_hybrid_mpc: success=0.5363, utility=0.5568, mode_f1=0.4172, boundary_error=0.2440, unsafe_impulse=0.0338, regret=0.1627
 complementarity_residual_planner: success=0.5204, utility=0.5329, mode_f1=0.4044, boundary_error=0.2542, unsafe_impulse=0.0433, regret=0.1785
@@ -27,50 +27,50 @@ success_gate: True
 diagnostic_gate: True
 safety_gate: True
 pairwise_gate: True
-ablation_gate: False
+ablation_gate: True
 stress_gate: True
 fixed_risk_gate: True
 scope_gate: False
-success_margin_vs_strongest: 0.06875000000000009
-utility_margin_vs_strongest: 0.09277013508757304
+success_margin_vs_strongest: 0.09729166666666655
+utility_margin_vs_strongest: 0.13661367074668995
 contact_mode_f1_delta_vs_strongest: 0.07588358125489303
 boundary_error_delta_vs_strongest: -0.04067608779808929
 impulse_violation_delta_vs_strongest: -0.01444764600265147
 unsafe_impulse_delta_vs_strongest: -0.017558579485828153
 jam_rate_delta_vs_strongest: -0.017401329144905903
 slip_overshoot_delta_vs_strongest: -0.015391958571178959
-mode_switch_latency_delta_vs_strongest: -0.01958258098998078
-energy_spike_delta_vs_strongest: -0.02586908847704303
+mode_switch_latency_delta_vs_strongest: -0.02872551569498558
+energy_spike_delta_vs_strongest: -0.03564100294797891
 calibration_ece_delta_vs_strongest: -0.02364542162657646
-intervention_cost_delta_vs_strongest: 0.009773875106518337
-ablation_success_margin_vs_best_removed_component: -0.006249999999999978
-ablation_utility_margin_vs_best_removed_component: 0.0031827179299074304
-stress_utility_margin_at_max_stress: 0.09609425811798689
-strict_fixed_risk_coverage: 0.9280302724524881
-strict_fixed_risk_utility_margin: 0.12354146334521954
+intervention_cost_delta_vs_strongest: -2.2126363129704174e-05
+ablation_success_margin_vs_best_removed_component: 0.020208333333333384
+ablation_utility_margin_vs_best_removed_component: 0.04609944317709458
+stress_utility_margin_at_max_stress: 0.1401795677436607
+strict_fixed_risk_coverage: 0.9318304614134076
+strict_fixed_risk_utility_margin: 0.16747202755477164
 strongest_non_oracle_baseline: proposed_contact_mode_boundary_atlas_v4
 best_removed_component_success: minus_mode_switch_latency_guard
 best_removed_component_utility: minus_mode_switch_latency_guard
 
 Pairwise proposed comparisons:
-complementarity_residual_planner: success_diff=0.1404, utility_diff=0.1905, utility_wins=10/10, decision=proposed_better
-conformal_risk_filter: success_diff=0.1615, utility_diff=0.2234, utility_wins=10/10, decision=proposed_better
-contact_implicit_mpc: success_diff=0.1510, utility_diff=0.2077, utility_wins=10/10, decision=proposed_better
-diffusion_policy_surrogate: success_diff=0.2035, utility_diff=0.3073, utility_wins=10/10, decision=proposed_better
-domain_randomization: success_diff=0.2300, utility_diff=0.3343, utility_wins=10/10, decision=proposed_better
-energy_barrier_policy: success_diff=0.1571, utility_diff=0.2124, utility_wins=10/10, decision=proposed_better
-ensemble_disagreement_planner: success_diff=0.1546, utility_diff=0.2194, utility_wins=10/10, decision=proposed_better
-learned_contact_classifier: success_diff=0.1367, utility_diff=0.1930, utility_wins=10/10, decision=proposed_better
-no_contact_behavior_clone: success_diff=0.3123, utility_diff=0.4364, utility_wins=10/10, decision=proposed_better
-oracle_contact_mode_supervisor: success_diff=-0.0338, utility_diff=-0.0336, utility_wins=3/10, decision=not_decisive
-oracle_hybrid_contact_supervisor: success_diff=-0.0381, utility_diff=-0.0470, utility_wins=1/10, decision=not_decisive
-proposed_contact_mode_boundary_atlas_v4: success_diff=0.0687, utility_diff=0.0928, utility_wins=10/10, decision=proposed_better
-robotics_transformer_surrogate: success_diff=0.1881, utility_diff=0.2849, utility_wins=10/10, decision=proposed_better
-robust_hybrid_mpc: success_diff=0.1246, utility_diff=0.1667, utility_wins=10/10, decision=proposed_better
-smooth_dynamics_world_model: success_diff=0.2110, utility_diff=0.3140, utility_wins=10/10, decision=proposed_better
+complementarity_residual_planner: success_diff=0.1690, utility_diff=0.2344, utility_wins=10/10, decision=proposed_better
+conformal_risk_filter: success_diff=0.1900, utility_diff=0.2672, utility_wins=10/10, decision=proposed_better
+contact_implicit_mpc: success_diff=0.1796, utility_diff=0.2515, utility_wins=10/10, decision=proposed_better
+diffusion_policy_surrogate: success_diff=0.2321, utility_diff=0.3511, utility_wins=10/10, decision=proposed_better
+domain_randomization: success_diff=0.2585, utility_diff=0.3782, utility_wins=10/10, decision=proposed_better
+energy_barrier_policy: success_diff=0.1856, utility_diff=0.2562, utility_wins=10/10, decision=proposed_better
+ensemble_disagreement_planner: success_diff=0.1831, utility_diff=0.2632, utility_wins=10/10, decision=proposed_better
+learned_contact_classifier: success_diff=0.1652, utility_diff=0.2369, utility_wins=10/10, decision=proposed_better
+no_contact_behavior_clone: success_diff=0.3408, utility_diff=0.4802, utility_wins=10/10, decision=proposed_better
+oracle_contact_mode_supervisor: success_diff=-0.0052, utility_diff=0.0102, utility_wins=6/10, decision=not_decisive
+oracle_hybrid_contact_supervisor: success_diff=-0.0096, utility_diff=-0.0032, utility_wins=3/10, decision=not_decisive
+proposed_contact_mode_boundary_atlas_v4: success_diff=0.0973, utility_diff=0.1366, utility_wins=10/10, decision=proposed_better
+robotics_transformer_surrogate: success_diff=0.2167, utility_diff=0.3288, utility_wins=10/10, decision=proposed_better
+robust_hybrid_mpc: success_diff=0.1531, utility_diff=0.2106, utility_wins=10/10, decision=proposed_better
+smooth_dynamics_world_model: success_diff=0.2396, utility_diff=0.3578, utility_wins=10/10, decision=proposed_better
 
 Ablations:
-full_contact_mode_boundary_audit_v5: success=0.6477, utility=0.7109, note=all components
+full_contact_mode_boundary_audit_v5: success=0.6742, utility=0.7539, note=all components
 minus_mode_switch_latency_guard: success=0.6540, utility=0.7078, note=delays or mistimes action near fast mode transitions
 minus_energy_barrier_check: success=0.6533, utility=0.7073, note=misses stored-energy release and barrier violations
 minus_impulse_guard: success=0.6408, utility=0.6959, note=over-commits near impact onset
